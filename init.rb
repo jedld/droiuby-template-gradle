@@ -20,6 +20,10 @@ class Init < Thor
     if (options[:hybrid])
       template File.join('index.xml.erb'), File.join(dest_folder, 'res','layout','index.xml')
     end
+
+    @sdk_dir = `which android`.sub('/tools/android','')
+
+    template File.join('local.properties.erb'), 'local.properties'
     template File.join('StartupActivity.java.erb'), File.join(dest_folder, 'java', *package_folders, "StartupActivity.java")
     template File.join('DroiubyActivity.java.erb'), File.join(dest_folder, 'java', *package_folders, "DroiubyActivity.java")
   end
